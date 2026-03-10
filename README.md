@@ -35,7 +35,7 @@ r-pass is designed for users who prefer keeping their credentials offline and un
 If you prefer to run the application from source, follow these steps:
 
 1. Clone the repository
-`git clone https://github.com/yourusername/r-passManager.git`
+`git clone https://github.com/rhymezip/r-passManager.git`
 `cd r-passManager`
 
 2. Create and activate a virtual environment
