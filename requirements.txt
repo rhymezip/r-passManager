@@ -1,0 +1,4 @@
+pyqt5 
+pycryptodome 
+pyperclip 
+argon2-cffi
