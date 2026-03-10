@@ -35,8 +35,8 @@ r-pass is designed for users who prefer keeping their credentials offline and un
 If you prefer to run the application from source, follow these steps:
 
 1. Clone the repository
-`git clone https://github.com/yourusername/r-pass.git`
-`cd r-pass`
+`git clone https://github.com/yourusername/r-passManager.git`
+`cd r-passManager`
 
 2. Create and activate a virtual environment
 `python3 -m venv venv`
@@ -46,7 +46,7 @@ If you prefer to run the application from source, follow these steps:
 `pip install -r requirements.txt`
 
 4. Run the application
-`python r-pass.py`
+`python r-passManager.py`
 
 ## Pre-compiled Executables ⌨
 
