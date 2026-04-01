@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 """
 ╔══════════════════════════════════════════════════════════════════╗
-║                       r-pass   v2.0                              ║
+║                          r-pass                                  ║
 ║         Cross-Platform Local Password Manager                    ║
 ║                                                                  ║
-║  Stack   : Python 3.9+ · PyQt5 · SQLite · AES-256-CBC            ║
-║  KDF     : PBKDF2-HMAC-SHA256 (310,000 iterations, 32-byte key)  ║
-║  Compat  : macOS 10.13+ (Intel/ARM) · Linux · Windows            ║
-║  v2.0    : Premium UI · Card View · Multi-Account · i18n         ║
+║  Stack   : Python 3.9+ · PyQt5 · SQLite · AES-256-GCM            ║
+║  KDF     : Argon2id (64MB, 3 iterations)                         ║
+║  Compat  : macOS · Linux · Windows                               ║
+║  i18n    : English · Türkçe · Русский                            ║
 ╚══════════════════════════════════════════════════════════════════╝
 """
 
