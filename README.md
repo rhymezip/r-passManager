@@ -11,17 +11,20 @@ r-pass is designed for users who prefer keeping their credentials offline and un
 
 ## Features
 
-- Offline By Design: No cloud syncing, no external servers. Your vault stays on your local machine.
-- Modern Cryptography: 
-  - Key Derivation: Argon2id (replacing legacy PBKDF2).
+- **Modern Dark UI**: Sleek, rounded interface with native macOS styling
+- **Offline By Design**: No cloud syncing, no external servers. Your vault stays on your local machine.
+- **Modern Cryptography**: 
+  - Key Derivation: Argon2id (memory-hard, side-channel resistant)
   - Encryption: AES-256 in GCM mode (Authenticated Encryption) ensures data confidentiality and integrity.
-- Cross-Platform: Native feel and performance on Windows, macOS, and Linux.
-- Internationalization (i18n): Built-in support for English, Turkish, and Russian.
-- Quality of Life: 
-  - Integrated password generator with entropy calculation.
-  - Automatic clipboard clearing (30 seconds).
-  - Auto-lock on inactivity (15 minutes).
-  - Secure vault backup and restore mechanism (.r-pass files).
+- **Cross-Platform**: Native feel and performance on Windows, macOS, and Linux.
+- **Internationalization (i18n)**: Built-in support for English, Turkish, and Russian.
+- **Quality of Life**: 
+  - Integrated password generator with entropy calculation
+  - Adjustable password length (8-128 characters)
+  - Character type toggles (uppercase, lowercase, digits, symbols)
+  - Automatic clipboard clearing (30 seconds)
+  - Auto-lock on inactivity (15 minutes)
+  - Secure vault backup and restore mechanism (.r-pass files)
 
 ## Tech Stack
 
@@ -53,23 +56,26 @@ If you prefer to run the application from source, follow these steps:
 Pre-compiled standalone binaries are available in the Releases section for all major operating systems. You do not need Python installed to run these.
 
 - Windows (.exe): Compiled for standard Windows environments.
-- macOS (.dmg): Compiled on High Sierra. Highly compatible, works seamlessly on both older systems and the latest macOS versions.
+- macOS (.app): Compiled for macOS with native dark theme.
 - Linux (.AppImage): Built on Arch Linux. 
   - Note: Because it is built on a rolling-release distribution, the AppImage requires relatively recent glibc versions. It may not run out-of-the-box on older LTS distributions (e.g., older Linux Mint or Debian stable releases).
 
 ## Usage 🖱
 
-1. Setup: On the first launch, create a master password. This password acts as the key to your vault and cannot be recovered if lost.
-2. Adding Entries: Click the `+ Add Account` or `New` button to store credentials. Use the built-in generator for secure passwords.
-3. Quick Actions: Hover over any entry to quickly copy the password or edit the details.
-4. Backups: Use the sidebar to securely export your encrypted vault, making it easy to migrate between devices.
+1. **Setup**: On the first launch, create a master password. This password acts as the key to your vault and cannot be recovered if lost.
+2. **Adding Entries**: Click the `New` button to store credentials. Use the built-in generator (🔑) for secure passwords.
+3. **Password Generator**: Click the key button to generate passwords with adjustable length and character options.
+4. **Quick Actions**: Hover over any entry to quickly copy the password or edit the details.
+5. **Backup/Restore**: Use the sidebar to securely export your encrypted vault, making it easy to migrate between devices.
+6. **Language**: Switch between English, Turkish, and Russian directly from the sidebar.
 
 ## Roadmap 📍
 
-- Native mobile companion apps.
-- Browser extension integration via native messaging.
-- Support for TOTP (Time-based One-Time Passwords).
-- Hardware security key (YubiKey) support for 2FA unlocking.
+- [ ] Native mobile companion apps
+- [ ] Browser extension integration via native messaging
+- [ ] Support for TOTP (Time-based One-Time Passwords)
+- [ ] Hardware security key (YubiKey) support for 2FA unlocking
+- [ ] Biometric unlock (Touch ID / Windows Hello)
 
 ## License 📜
 
@@ -82,4 +88,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-

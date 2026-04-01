@@ -54,7 +54,7 @@ from PyQt5.QtCore import (Qt, QTimer, QThread, pyqtSignal,
 from PyQt5.QtGui import (QFont, QColor, QKeySequence, QPainter,
                           QPainterPath, QLinearGradient, QBrush,
                           QPen, QPixmap, QIcon, QFontDatabase,
-                          QCursor)
+                          QCursor, QRegion)
 
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
@@ -100,14 +100,13 @@ TRANSLATIONS = {
     "en": {
         "lang_en": "🇺🇸  English", "lang_tr": "🇹🇷  Türkçe", "lang_ru": " 🇷🇺  Русский",
         "language": "Language", "select_language": "Select Language",
-        "lang_restart_note": "Language saved. Restart to apply.",
+        "lang_restart_note": "Language updated.",
         "app_subtitle_unlock": "Enter your master password",
         "app_subtitle_setup": "Choose a master password",
         "master_warning": "This password protects all your records.\nIt cannot be recovered if forgotten.",
         "master_placeholder": "Master Password",
         "master_confirm_placeholder": "Confirm Password",
         "btn_create_vault": "Create Vault", "btn_unlock": "Unlock", "btn_cancel": "Cancel",
-        "btn_add_account": "➕ Add Account",
         "kdf_working": "Unlocking…",
         "err_min_chars": "At least 8 characters required.",
         "err_no_match": "Passwords don't match.",
@@ -136,7 +135,7 @@ TRANSLATIONS = {
         "gen_title": "Password Generator", "lbl_length": "Length",
         "chk_upper": "A–Z", "chk_lower": "a–z",
         "chk_digits": "0–9", "chk_symbols": "!@#",
-        "btn_use_password": "Use This Password",
+        "btn_use_password": "Use",
         "gen_entropy": "{n} chars · ~{e:.0f} bits entropy",
         "tip_copy_user": "Copy username",
         "tip_copy_pass": "Copy password",
@@ -171,8 +170,6 @@ TRANSLATIONS = {
         "restore_err_bad_file": "Invalid or corrupted backup file.",
         "restore_err_wrong_pass": "Incorrect password for this backup.",
         "restore_success": "{n} passwords restored",
-        "accounts_title": "Accounts",
-        "add_account": "Add Account",
         "no_entries": "No passwords yet",
         "no_entries_sub": "Press New to add your first password",
         "username_label": "USERNAME",
@@ -185,14 +182,13 @@ TRANSLATIONS = {
     "tr": {
         "lang_en": "🇺🇸  English", "lang_tr": "🇹🇷  Türkçe", "lang_ru": " 🇷🇺  Русский",
         "language": "Dil", "select_language": "Dil Seç",
-        "lang_restart_note": "Dil kaydedildi. Yeniden başlatınca uygulanır.",
+        "lang_restart_note": "Dil güncellendi.",
         "app_subtitle_unlock": "Master şifrenizi girin",
         "app_subtitle_setup": "Bir master şifre seçin",
         "master_warning": "Bu şifre tüm kayıtlarınızı korur.\nUnutulursa kurtarılamaz.",
         "master_placeholder": "Master Şifre",
         "master_confirm_placeholder": "Şifreyi Onayla",
         "btn_create_vault": "Vault Oluştur", "btn_unlock": "Aç", "btn_cancel": "İptal",
-        "btn_add_account": "➕ Hesap Ekle",
         "kdf_working": "Açılıyor…",
         "err_min_chars": "En az 8 karakter gerekli.",
         "err_no_match": "Şifreler eşleşmiyor.",
@@ -221,7 +217,7 @@ TRANSLATIONS = {
         "gen_title": "Şifre Üretici", "lbl_length": "Uzunluk",
         "chk_upper": "A–Z", "chk_lower": "a–z",
         "chk_digits": "0–9", "chk_symbols": "!@#",
-        "btn_use_password": "Bu Şifreyi Kullan",
+        "btn_use_password": "Kullan",
         "gen_entropy": "{n} karakter · ~{e:.0f} bit entropi",
         "tip_copy_user": "Kullanıcı adını kopyala",
         "tip_copy_pass": "Şifreyi kopyala",
@@ -256,8 +252,6 @@ TRANSLATIONS = {
         "restore_err_bad_file": "Geçersiz veya bozuk yedek dosyası.",
         "restore_err_wrong_pass": "Bu yedek için şifre yanlış.",
         "restore_success": "{n} şifre geri yüklendi",
-        "accounts_title": "Hesaplar",
-        "add_account": "Hesap Ekle",
         "no_entries": "Henüz şifre yok",
         "no_entries_sub": "İlk şifrenizi eklemek için Yeni'ye basın",
         "username_label": "KULLANICI ADI",
@@ -270,14 +264,13 @@ TRANSLATIONS = {
     "ru": {
         "lang_en": "🇺🇸  English", "lang_tr": "🇹🇷  Türkçe", "lang_ru": " 🇷🇺  Русский",
         "language": "Язык", "select_language": "Выбор языка",
-        "lang_restart_note": "Язык сохранён. Перезапустите для применения.",
+        "lang_restart_note": "Язык обновлён.",
         "app_subtitle_unlock": "Введите мастер-пароль",
         "app_subtitle_setup": "Создайте мастер-пароль",
         "master_warning": "Этот пароль защищает все ваши записи.\nЕсли забудете — восстановление невозможно.",
         "master_placeholder": "Мастер-пароль",
         "master_confirm_placeholder": "Подтвердите пароль",
         "btn_create_vault": "Создать хранилище", "btn_unlock": "Открыть", "btn_cancel": "Отмена",
-        "btn_add_account": "➕ Добавить аккаунт",
         "kdf_working": "Открывается…",
         "err_min_chars": "Минимум 8 символов.",
         "err_no_match": "Пароли не совпадают.",
@@ -306,7 +299,7 @@ TRANSLATIONS = {
         "gen_title": "Генератор паролей", "lbl_length": "Длина",
         "chk_upper": "A–Z", "chk_lower": "a–z",
         "chk_digits": "0–9", "chk_symbols": "!@#",
-        "btn_use_password": "Использовать пароль",
+        "btn_use_password": "Использовать",
         "gen_entropy": "{n} симв · ~{e:.0f} бит энтропии",
         "tip_copy_user": "Копировать имя пользователя",
         "tip_copy_pass": "Копировать пароль",
@@ -341,8 +334,6 @@ TRANSLATIONS = {
         "restore_err_bad_file": "Недействительный или повреждённый файл.",
         "restore_err_wrong_pass": "Неверный пароль для этого файла.",
         "restore_success": "Восстановлено {n} паролей",
-        "accounts_title": "Аккаунты",
-        "add_account": "Добавить аккаунт",
         "no_entries": "Паролей пока нет",
         "no_entries_sub": "Нажмите «Новый», чтобы добавить первый пароль",
         "username_label": "ИМЯ ПОЛЬЗОВАТЕЛЯ",
@@ -594,7 +585,7 @@ QSS = f"""
 QWidget {{
     background-color: {C['bg']};
     color: {C['text2']};
-    font-family: -apple-system, "SF Pro Display", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-family: ".AppleSystemUIFont", "Helvetica Neue", Arial;
     font-size: 13px;
 }}
 QMainWindow {{ background-color: {C['bg']}; }}
@@ -634,7 +625,7 @@ QPushButton#ghost:hover {{ color: {C['text']}; background-color: {C['bg3']}; }}
 QPushButton#icon_btn {{
     background-color: transparent;
     border: none;
-    padding: 6px;
+    padding: 4px 8px;
     border-radius: 6px;
     color: {C['text4']};
     font-size: 14px;
@@ -683,7 +674,7 @@ QScrollBar::handle:vertical:hover {{ background: {C['border2']}; }}
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0; }}
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {{ background: none; }}
 
-QCheckBox {{ color: {C['text3']}; spacing: 8px; }}
+QCheckBox {{ color: {C['text3']}; spacing: 8px; background: transparent; border: none; }}
 QCheckBox::indicator {{
     width: 17px; height: 17px;
     border-radius: 5px;
@@ -715,8 +706,11 @@ QProgressBar {{
 }}
 QProgressBar::chunk {{ background-color: {C['accent']}; border-radius: 2px; }}
 
+QSlider {{
+    background: transparent;
+}}
 QSlider::groove:horizontal {{
-    height: 3px;
+    height: 4px;
     background: {C['bg3']};
     border-radius: 2px;
 }}
@@ -724,7 +718,7 @@ QSlider::handle:horizontal {{
     width: 16px; height: 16px;
     background: {C['accent']};
     border-radius: 8px;
-    margin: -7px 0;
+    margin: -6px 0;
 }}
 QSlider::sub-page:horizontal {{
     background: {C['accent']};
@@ -740,7 +734,7 @@ QSpinBox {{
 }}
 QSpinBox::up-button, QSpinBox::down-button {{ width: 0; }}
 
-QDialog {{ background-color: {C['bg1']}; }}
+QDialog {{ background-color: {C['bg1']}; border: none; }}
 
 QToolTip {{
     background-color: {C['bg3']};
@@ -862,14 +856,24 @@ class LoginScreen(QDialog):
         self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
         self.setFixedSize(400, 340 if mode == "setup" else 280)
         self.setModal(True)
+        self.setAttribute(Qt.WA_TranslucentBackground, False)
         self._build()
+        self._update_mask()
+
+    def _update_mask(self):
+        from PyQt5.QtCore import QRectF as QRF
+        rect = QRF(0, 0, self.width(), self.height())
+        radius = 20
+        path = QPainterPath()
+        path.addRoundedRect(rect, radius, radius)
+        self.setMask(QRegion(path.toFillPolygon().toPolygon()))
 
     def _build(self):
-        self.setStyleSheet(QSS + f"""
+        self.setStyleSheet(f"""
             QDialog {{
                 background-color: {C['bg1']};
-                border: 1px solid {C['border']};
-                border-radius: 16px;
+                border: none;
+                border-radius: 20px;
             }}
         """)
         lay = QVBoxLayout(self)
@@ -877,11 +881,15 @@ class LoginScreen(QDialog):
         lay.setSpacing(0)
 
         top = QHBoxLayout()
-        icon = QLabel("◆")
-        icon.setStyleSheet(f"font-size: 28px; background: transparent; color: {C['text']};")
-        top.addWidget(icon)
+        close_btn = QPushButton("✕")
+        close_btn.setObjectName("ghost")
+        close_btn.setFixedSize(30, 30)
+        close_btn.setStyleSheet(f"QPushButton{{background:transparent;border:none;color:{C['text3']};font-size:14px;}}"
+                               f"QPushButton:hover{{color:{C['text']};background:{C['bg3']};border-radius:6px;}}")
+        close_btn.clicked.connect(self.reject)
+        top.addWidget(close_btn)
         top.addStretch()
-        lang_btn = QPushButton(" 🏳 ")
+        lang_btn = QPushButton(" 🌐 ")
         lang_btn.setObjectName("ghost")
         lang_btn.setFixedSize(40, 40)
         lang_btn.setStyleSheet(f"QPushButton{{background:transparent;border:none;color:{C['text3']};font-size:16px;}}"
@@ -892,14 +900,14 @@ class LoginScreen(QDialog):
         lay.addSpacing(24)
 
         # title
-        title = QLabel("r-pass")
-        title.setStyleSheet(f"color: {C['text']}; font-size: 22px; font-weight: 700; background: transparent; letter-spacing: -0.5px;")
-        lay.addWidget(title)
+        self.title = QLabel("r-pass")
+        self.title.setStyleSheet(f"color: {C['text']}; font-size: 22px; font-weight: 700; background: transparent; letter-spacing: -0.5px;")
+        lay.addWidget(self.title)
         lay.addSpacing(4)
 
-        sub = QLabel(t(f"app_subtitle_{self.mode}"))
-        sub.setStyleSheet(f"color: {C['text3']}; font-size: 13px; background: transparent;")
-        lay.addWidget(sub)
+        self.sub = QLabel(t(f"app_subtitle_{self.mode}"))
+        self.sub.setStyleSheet(f"color: {C['text3']}; font-size: 13px; background: transparent;")
+        lay.addWidget(self.sub)
         lay.addSpacing(24)
 
         # password field
@@ -968,7 +976,11 @@ class LoginScreen(QDialog):
     def _open_lang(self):
         dlg = LanguageDialog(self)
         if dlg.exec_() == QDialog.Accepted:
-            QMessageBox.information(self, "r-pass", t("lang_restart_note"))
+            self.sub.setText(t(f"app_subtitle_{self.mode}"))
+            self.okb.setText(t("btn_create_vault") if self.mode == "setup" else t("btn_unlock"))
+            self.pw.setPlaceholderText(t("master_placeholder"))
+            if self.mode == "setup" and hasattr(self, "pw2"):
+                self.pw2.setPlaceholderText(t("master_confirm_placeholder"))
 
     def _proceed(self):
         pw = self.pw.text()
@@ -1005,26 +1017,53 @@ class LanguageDialog(QDialog):
         self.setFixedSize(320, 260)
         self.setModal(True)
         self._build()
+        self._apply_mask()
+
+    def _apply_mask(self):
+        from PyQt5.QtCore import QRectF as QRF
+        rect = QRF(0, 0, self.width(), self.height())
+        radius = 20
+        path = QPainterPath()
+        path.addRoundedRect(rect, radius, radius)
+        self.setMask(QRegion(path.toFillPolygon().toPolygon()))
 
     def _build(self):
         self.setStyleSheet(QSS + f"""
             QDialog {{
                 background: {C['bg1']};
-                border: 1px solid {C['border']};
-                border-radius: 14px;
+                border-radius: 16px;
             }}
         """)
         lay = QVBoxLayout(self)
-        lay.setContentsMargins(28, 28, 28, 28)
-        lay.setSpacing(14)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.setSpacing(0)
+
+        header = QWidget()
+        header.setFixedHeight(56)
+        header.setStyleSheet(f"background: {C['bg1']}; border-top-left-radius: 16px; border-top-right-radius: 16px;")
+        hl = QHBoxLayout(header)
+        hl.setContentsMargins(20, 0, 16, 0)
+
+        close_btn = QPushButton("✕")
+        close_btn.setObjectName("ghost")
+        close_btn.setFixedSize(30, 30)
+        close_btn.setStyleSheet(f"QPushButton{{background:transparent;border:none;color:{C['text3']};font-size:14px;}}"
+                               f"QPushButton:hover{{color:{C['text']};background:{C['bg3']};border-radius:6px;}}")
+        close_btn.clicked.connect(self.reject)
+        hl.addWidget(close_btn)
+        hl.addStretch()
 
         title = QLabel(t("select_language"))
         title.setStyleSheet(f"color:{C['text']};font-size:16px;font-weight:700;background:transparent;")
-        lay.addWidget(title)
+        hl.addWidget(title)
+        hl.addStretch()
+        lay.addWidget(header)
 
-        sep = QFrame(); sep.setFrameShape(QFrame.HLine)
-        sep.setStyleSheet(f"color:{C['border']};")
-        lay.addWidget(sep)
+        content = QWidget()
+        content.setStyleSheet(f"background: {C['bg1']};")
+        cl = QVBoxLayout(content)
+        cl.setContentsMargins(24, 20, 24, 20)
+        cl.setSpacing(14)
 
         self._grp = QButtonGroup(self)
         for code in ("en", "tr", "ru"):
@@ -1045,16 +1084,18 @@ class LanguageDialog(QDialog):
                     background: {C['accent']}; border-color: {C['accent']}; }}
             """)
             rb.setProperty("lc", code)
-            self._grp.addButton(rb); lay.addWidget(rb)
+            self._grp.addButton(rb); cl.addWidget(rb)
 
-        lay.addStretch()
+        cl.addStretch()
         row = QHBoxLayout(); row.setSpacing(8)
         c = QPushButton(t("btn_cancel")); c.setObjectName("secondary")
         c.setFixedHeight(38); c.clicked.connect(self.reject)
         ok = QPushButton("OK"); ok.setFixedHeight(38)
         ok.clicked.connect(self._apply); ok.setDefault(True)
         row.addWidget(c); row.addWidget(ok)
-        lay.addLayout(row)
+        cl.addLayout(row)
+
+        lay.addWidget(content)
 
     def _apply(self):
         for b in self._grp.buttons():
@@ -1105,16 +1146,18 @@ class EntryCardWidget(QWidget):
         lay.addLayout(text_col, stretch=1)
 
         # action buttons
-        self.btn_copy = QPushButton("📄")
+        self.btn_copy = QPushButton("📋")
         self.btn_copy.setObjectName("icon_btn")
-        self.btn_copy.setFixedSize(32, 32)
+        self.btn_copy.setFixedSize(28, 28)
+        self.btn_copy.setStyleSheet("QPushButton#icon_btn{padding:2px 4px;}")
         self.btn_copy.setToolTip(t("tip_copy_pass"))
         self.btn_copy.clicked.connect(lambda: self.copy_pass_signal.emit(self.entry))
         self.btn_copy.hide()
 
         self.btn_edit = QPushButton("✏️")
         self.btn_edit.setObjectName("icon_btn")
-        self.btn_edit.setFixedSize(32, 32)
+        self.btn_edit.setFixedSize(28, 28)
+        self.btn_edit.setStyleSheet("QPushButton#icon_btn{padding:2px 4px;}")
         self.btn_edit.setToolTip(t("tip_edit"))
         self.btn_edit.clicked.connect(lambda: self.edit_signal.emit(self.entry))
         self.btn_edit.hide()
@@ -1181,7 +1224,7 @@ class DetailPanel(QWidget):
 
     def _build(self):
         self.setMinimumWidth(320)
-        self.setStyleSheet(f"background: {C['bg1']}; border-left: 1px solid {C['border']};")
+        self.setStyleSheet(f"background: {C['bg1']};")
 
         lay = QVBoxLayout(self)
         lay.setContentsMargins(0, 0, 0, 0)
@@ -1189,8 +1232,8 @@ class DetailPanel(QWidget):
 
         # header
         header = QWidget()
-        header.setFixedHeight(60)
-        header.setStyleSheet(f"background: {C['bg1']}; border-bottom: 1px solid {C['border']};")
+        header.setFixedHeight(56)
+        header.setStyleSheet(f"background: {C['bg1']};")
         hl = QHBoxLayout(header)
         hl.setContentsMargins(20, 0, 16, 0)
 
@@ -1225,7 +1268,7 @@ class DetailPanel(QWidget):
 
         # bottom delete button
         bot = QWidget()
-        bot.setStyleSheet(f"background: {C['bg1']}; border-top: 1px solid {C['border']};")
+        bot.setStyleSheet(f"background: {C['bg1']};")
         bl = QHBoxLayout(bot); bl.setContentsMargins(20, 12, 20, 12)
         self.del_btn = QPushButton(t("btn_delete"))
         self.del_btn.setObjectName("danger")
@@ -1335,9 +1378,10 @@ class DetailPanel(QWidget):
         row.addWidget(self.pass_lbl, stretch=1)
 
         # eye button
-        eye = QPushButton("🔍")
+        eye = QPushButton("👁")
         eye.setObjectName("icon_btn")
         eye.setFixedSize(28, 28)
+        eye.setStyleSheet("QPushButton#icon_btn{padding:2px;}")
         eye.setCheckable(True)
         def toggle_pass(checked):
             self._pass_visible = checked
@@ -1349,9 +1393,10 @@ class DetailPanel(QWidget):
         row.addWidget(eye)
 
         # Copy button
-        cb = QPushButton("📄")
+        cb = QPushButton("📋")
         cb.setObjectName("icon_btn")
         cb.setFixedSize(28, 28)
+        cb.setStyleSheet("QPushButton#icon_btn{padding:2px;}")
         cb.clicked.connect(lambda: self.copy_pass_requested.emit(self.entry))
         row.addWidget(cb)
 
@@ -1365,15 +1410,24 @@ class EntryDialog(QDialog):
         self.entry = entry
         self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
         self.setFixedWidth(480)
+        self.setFixedHeight(580)
         self.setModal(True)
         self._build()
         if entry: self._load(entry)
+        QTimer.singleShot(0, self._apply_mask)
+
+    def _apply_mask(self):
+        from PyQt5.QtCore import QRectF as QRF
+        rect = QRF(0, 0, self.width(), self.height())
+        radius = 20
+        path = QPainterPath()
+        path.addRoundedRect(rect, radius, radius)
+        self.setMask(QRegion(path.toFillPolygon().toPolygon()))
 
     def _build(self):
         self.setStyleSheet(QSS + f"""
             QDialog {{
                 background: {C['bg1']};
-                border: 1px solid {C['border']};
                 border-radius: 16px;
             }}
         """)
@@ -1382,13 +1436,9 @@ class EntryDialog(QDialog):
         lay.setSpacing(16)
 
         # title
-        title = QLabel(t("dlg_edit_entry") if self.entry else t("dlg_add_entry"))
-        title.setStyleSheet(f"color:{C['text']};font-size:18px;font-weight:700;background:transparent;")
-        lay.addWidget(title)
-
-        sep = QFrame(); sep.setFrameShape(QFrame.HLine)
-        sep.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;")
-        lay.addWidget(sep)
+        self.title = QLabel(t("dlg_edit_entry") if self.entry else t("dlg_add_entry"))
+        self.title.setStyleSheet(f"color:{C['text']};font-size:18px;font-weight:700;background:transparent;")
+        lay.addWidget(self.title)
 
         def add_field(label, widget):
             lbl = QLabel(label)
@@ -1436,17 +1486,14 @@ class EntryDialog(QDialog):
         self.nt.setFixedHeight(72)
         lay.addWidget(self.nt)
 
-        sep2 = QFrame(); sep2.setFrameShape(QFrame.HLine)
-        sep2.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;")
-        lay.addWidget(sep2)
-
         # buttons
         br = QHBoxLayout(); br.setSpacing(10)
         cancel = QPushButton(t("btn_cancel")); cancel.setObjectName("secondary")
         cancel.setFixedHeight(40); cancel.clicked.connect(self.reject)
-        save = QPushButton(t("btn_save")); save.setFixedHeight(40)
-        save.clicked.connect(self._save); save.setDefault(True)
-        br.addWidget(cancel); br.addWidget(save)
+        save_btn = QPushButton(t("btn_save")); save_btn.setFixedHeight(40)
+        save_btn.clicked.connect(self._save)
+        save_btn.setDefault(True)
+        br.addWidget(cancel); br.addWidget(save_btn)
         lay.addLayout(br)
 
     def _strength(self, text):
@@ -1465,11 +1512,35 @@ class EntryDialog(QDialog):
         self.nt.setPlainText(e.get("notes", ""))
 
     def _save(self):
+        base_style = f"""
+            QLineEdit {{
+                background: {C['bg2']};
+                color: {C['text']};
+                border: 1px solid {C['border']};
+                border-radius: 8px;
+                padding: 9px 13px;
+                font-size: 14px;
+                selection-background-color: {C['accent']};
+            }}
+            QLineEdit:focus {{
+                border-color: {C['accent']};
+                background-color: {C['bg2']};
+                outline: none;
+            }}
+            QLineEdit::placeholder {{ color: {C['text4']}; }}
+        """
+        has_error = False
         if not self.nm.text().strip():
-            self.nm.setStyleSheet(self.nm.styleSheet() + f"border-color:{C['red']};")
-            return
+            self.nm.setStyleSheet(base_style + f"border-color:{C['red']};")
+            has_error = True
+        else:
+            self.nm.setStyleSheet(base_style)
         if not self.pw.text():
-            self.pw.setStyleSheet(self.pw.styleSheet() + f"border-color:{C['red']};")
+            self.pw.setStyleSheet(base_style + f"border-color:{C['red']};")
+            has_error = True
+        else:
+            self.pw.setStyleSheet(base_style)
+        if has_error:
             return
         self.accept()
 
@@ -1490,15 +1561,25 @@ class GeneratorDialog(QDialog):
         self.result = ""
         self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
         self.setFixedWidth(440)
+        self.setFixedHeight(520)
         self.setModal(True)
+        self._copied = False
         self._build()
         self._gen()
+        self._apply_mask()
+
+    def _apply_mask(self):
+        from PyQt5.QtCore import QRectF as QRF
+        rect = QRF(0, 0, self.width(), self.height())
+        radius = 20
+        path = QPainterPath()
+        path.addRoundedRect(rect, radius, radius)
+        self.setMask(QRegion(path.toFillPolygon().toPolygon()))
 
     def _build(self):
         self.setStyleSheet(QSS + f"""
             QDialog {{
                 background: {C['bg1']};
-                border: 1px solid {C['border']};
                 border-radius: 16px;
             }}
         """)
@@ -1509,10 +1590,6 @@ class GeneratorDialog(QDialog):
         title = QLabel(t("gen_title"))
         title.setStyleSheet(f"color:{C['text']};font-size:18px;font-weight:700;background:transparent;")
         lay.addWidget(title)
-
-        sep = QFrame(); sep.setFrameShape(QFrame.HLine)
-        sep.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;")
-        lay.addWidget(sep)
 
         # Password display
         pw_row = QHBoxLayout(); pw_row.setSpacing(10)
@@ -1543,10 +1620,6 @@ class GeneratorDialog(QDialog):
         self.slbl.setStyleSheet(f"color:{C['text3']};font-size:11px;background:transparent;")
         lay.addWidget(self.slbl)
 
-        sep2 = QFrame(); sep2.setFrameShape(QFrame.HLine)
-        sep2.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;")
-        lay.addWidget(sep2)
-
         # Length
         len_row = QHBoxLayout()
         ll = QLabel(t("lbl_length"))
@@ -1561,49 +1634,61 @@ class GeneratorDialog(QDialog):
         self.sl.valueChanged.connect(self._gen)
         lay.addWidget(self.sl)
 
+        self._copy_lbl = QLabel("")
+        self._copy_lbl.setStyleSheet(f"color:{C['green']};font-size:12px;background:transparent;")
+        lay.addWidget(self._copy_lbl)
+
         # Checkboxes
-        chk_row = QHBoxLayout(); chk_row.setSpacing(16)
+        chk_row = QHBoxLayout(); chk_row.setSpacing(8)
         self.cu = QCheckBox(t("chk_upper")); self.cl = QCheckBox(t("chk_lower"))
         self.cd = QCheckBox(t("chk_digits")); self.cs = QCheckBox(t("chk_symbols"))
         for c in [self.cu, self.cl, self.cd, self.cs]:
             c.setChecked(True); c.stateChanged.connect(self._gen); chk_row.addWidget(c)
         lay.addLayout(chk_row)
 
-        sep3 = QFrame(); sep3.setFrameShape(QFrame.HLine)
-        sep3.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;")
-        lay.addWidget(sep3)
-
         br = QHBoxLayout(); br.setSpacing(10)
         cancel = QPushButton(t("btn_cancel")); cancel.setObjectName("secondary")
         cancel.setFixedHeight(40); cancel.clicked.connect(self.reject)
-        use = QPushButton(t("btn_use_password")); use.setFixedHeight(40)
-        use.clicked.connect(self.accept); use.setDefault(True)
-        br.addWidget(cancel); br.addWidget(use)
+        use_btn = QPushButton(t("btn_use_password")); use_btn.setFixedHeight(40)
+        use_btn.clicked.connect(self._copy_and_close)
+        use_btn.setDefault(True)
+        br.addWidget(cancel); br.addWidget(use_btn)
         lay.addLayout(br)
 
     def _gen(self):
-        length = self.sp.value() if hasattr(self, "sp") else 20
+        import math
+        length = self.sp.value()
         pwd = generate_password(
             length,
-            use_upper=self.cu.isChecked() if hasattr(self, "cu") else True,
-            use_lower=self.cl.isChecked() if hasattr(self, "cl") else True,
-            use_digits=self.cd.isChecked() if hasattr(self, "cd") else True,
-            use_symbols=self.cs.isChecked() if hasattr(self, "cs") else True,
+            use_upper=self.cu.isChecked(),
+            use_lower=self.cl.isChecked(),
+            use_digits=self.cd.isChecked(),
+            use_symbols=self.cs.isChecked(),
         )
         self.result = pwd
-        if hasattr(self, "rl"):
-            self.rl.setText(pwd)
-            sc, lb = password_strength(pwd)
-            self.sbar.set_strength(sc, lb)
-            import math
-            alphabet_size = 0
-            if hasattr(self, "cu") and self.cu.isChecked(): alphabet_size += 26
-            if hasattr(self, "cl") and self.cl.isChecked(): alphabet_size += 26
-            if hasattr(self, "cd") and self.cd.isChecked(): alphabet_size += 10
-            if hasattr(self, "cs") and self.cs.isChecked(): alphabet_size += len(SYMBOLS)
-            if alphabet_size < 1: alphabet_size = 52
-            entropy = length * math.log2(alphabet_size)
-            self.slbl.setText(t("gen_entropy", n=length, e=entropy))
+        self.rl.setText(pwd)
+        sc, lb = password_strength(pwd)
+        self.sbar.set_strength(sc, lb)
+        alphabet_size = 0
+        if self.cu.isChecked(): alphabet_size += 26
+        if self.cl.isChecked(): alphabet_size += 26
+        if self.cd.isChecked(): alphabet_size += 10
+        if self.cs.isChecked(): alphabet_size += len(SYMBOLS)
+        if alphabet_size < 1: alphabet_size = 52
+        entropy = length * math.log2(alphabet_size)
+        self.slbl.setText(t("gen_entropy", n=length, e=entropy))
+        self._copy_lbl.setText("")
+        self._copied = False
+
+    def _copy_password(self):
+        copy_to_clipboard(self.result)
+        self._copy_lbl.setText(t("status_copy_pass"))
+        self._copied = True
+
+    def _copy_and_close(self):
+        copy_to_clipboard(self.result)
+        self._copy_lbl.setText(t("status_copy_pass"))
+        self.accept()
 
 # backup
 
@@ -1611,37 +1696,93 @@ class BackupDialog(QDialog):
     def __init__(self, db, key, parent=None):
         super().__init__(parent); self.db = db; self.key = key
         self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
-        self.setFixedWidth(420); self.setModal(True)
+        self.setFixedSize(420, 320)
+        self.setModal(True)
         self._build()
+        self._apply_mask()
+
+    def _apply_mask(self):
+        from PyQt5.QtCore import QRectF as QRF
+        rect = QRF(0, 0, self.width(), self.height())
+        radius = 20
+        path = QPainterPath()
+        path.addRoundedRect(rect, radius, radius)
+        self.setMask(QRegion(path.toFillPolygon().toPolygon()))
 
     def _build(self):
-        self.setStyleSheet(QSS + f"QDialog{{background:{C['bg1']};border:1px solid {C['border']};border-radius:16px;}}")
-        lay = QVBoxLayout(self); lay.setContentsMargins(28, 28, 28, 28); lay.setSpacing(14)
+        self.setStyleSheet(QSS + f"""
+            QDialog {{
+                background: {C['bg1']};
+                border-radius: 16px;
+            }}
+        """)
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.setSpacing(0)
+
+        header = QWidget()
+        header.setFixedHeight(56)
+        header.setStyleSheet(f"background: {C['bg1']}; border-top-left-radius: 16px; border-top-right-radius: 16px;")
+        hl = QHBoxLayout(header)
+        hl.setContentsMargins(20, 0, 16, 0)
+
+        close_btn = QPushButton("✕")
+        close_btn.setObjectName("ghost")
+        close_btn.setFixedSize(30, 30)
+        close_btn.setStyleSheet(f"QPushButton{{background:transparent;border:none;color:{C['text3']};font-size:14px;}}"
+                               f"QPushButton:hover{{color:{C['text']};background:{C['bg3']};border-radius:6px;}}")
+        close_btn.clicked.connect(self.reject)
+        hl.addWidget(close_btn)
+        hl.addStretch()
 
         t_ = QLabel(t("backup_title"))
-        t_.setStyleSheet(f"color:{C['text']};font-size:18px;font-weight:700;background:transparent;")
-        lay.addWidget(t_)
-        sep = QFrame(); sep.setFrameShape(QFrame.HLine)
-        sep.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;")
-        lay.addWidget(sep)
+        t_.setStyleSheet(f"color:{C['text']};font-size:16px;font-weight:700;background:transparent;")
+        hl.addWidget(t_)
+        hl.addStretch()
+        lay.addWidget(header)
+
+        content = QWidget()
+        content.setStyleSheet(f"background: {C['bg1']};")
+        cl = QVBoxLayout(content)
+        cl.setContentsMargins(24, 20, 24, 20)
+        cl.setSpacing(16)
+
+        icon_w = QWidget()
+        icon_l = QVBoxLayout(icon_w)
+        icon_l.setAlignment(Qt.AlignCenter)
+        icon = QLabel("📦")
+        icon.setStyleSheet("font-size: 48px; background: transparent;")
+        icon_l.addWidget(icon)
+        cl.addWidget(icon_w)
 
         desc = QLabel(t("backup_desc"))
         desc.setWordWrap(True)
+        desc.setAlignment(Qt.AlignCenter)
         desc.setStyleSheet(f"color:{C['text3']};font-size:13px;background:transparent;line-height:1.5;")
-        lay.addWidget(desc)
+        cl.addWidget(desc)
 
-        self.msg = QLabel(""); self.msg.setWordWrap(True)
+        self.msg = QLabel("")
+        self.msg.setWordWrap(True)
+        self.msg.setAlignment(Qt.AlignCenter)
         self.msg.setStyleSheet(f"color:{C['green']};font-size:12px;background:transparent;")
-        self.msg.hide(); lay.addWidget(self.msg)
-        lay.addStretch()
+        self.msg.hide()
+        cl.addWidget(self.msg)
+        cl.addStretch()
 
-        sep2 = QFrame(); sep2.setFrameShape(QFrame.HLine)
-        sep2.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;")
-        lay.addWidget(sep2)
-        br = QHBoxLayout(); br.setSpacing(10)
-        cl = QPushButton(t("btn_cancel")); cl.setObjectName("secondary"); cl.setFixedHeight(40); cl.clicked.connect(self.accept)
-        bk = QPushButton(t("backup_btn")); bk.setFixedHeight(40); bk.clicked.connect(self._do)
-        br.addWidget(cl); br.addWidget(bk); lay.addLayout(br)
+        br = QHBoxLayout()
+        br.setSpacing(12)
+        cl_b = QPushButton(t("btn_cancel"))
+        cl_b.setObjectName("secondary")
+        cl_b.setFixedHeight(40)
+        cl_b.clicked.connect(self.accept)
+        bk = QPushButton(t("backup_btn"))
+        bk.setFixedHeight(40)
+        bk.clicked.connect(self._do)
+        br.addWidget(cl_b)
+        br.addWidget(bk)
+        cl.addLayout(br)
+
+        lay.addWidget(content)
 
     def _do(self):
         default = f"r-pass_{datetime.now().strftime('%Y%m%d_%H%M%S')}.r-pass"
@@ -1667,39 +1808,81 @@ class RestoreDialog(QDialog):
     def __init__(self, db, key, parent=None):
         super().__init__(parent); self.db = db; self.key = key
         self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
-        self.setFixedWidth(460); self.setModal(True)
+        self.setFixedSize(440, 420)
+        self.setModal(True)
         self._build()
+        self._apply_mask()
+
+    def _apply_mask(self):
+        from PyQt5.QtCore import QRectF as QRF
+        rect = QRF(0, 0, self.width(), self.height())
+        radius = 20
+        path = QPainterPath()
+        path.addRoundedRect(rect, radius, radius)
+        self.setMask(QRegion(path.toFillPolygon().toPolygon()))
 
     def _build(self):
-        self.setStyleSheet(QSS + f"QDialog{{background:{C['bg1']};border:1px solid {C['border']};border-radius:16px;}}")
-        lay = QVBoxLayout(self); lay.setContentsMargins(28, 28, 28, 28); lay.setSpacing(14)
+        self.setStyleSheet(QSS + f"""
+            QDialog {{
+                background: {C['bg1']};
+                border-radius: 16px;
+            }}
+        """)
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.setSpacing(0)
+
+        header = QWidget()
+        header.setFixedHeight(56)
+        header.setStyleSheet(f"background: {C['bg1']}; border-top-left-radius: 16px; border-top-right-radius: 16px;")
+        hl = QHBoxLayout(header)
+        hl.setContentsMargins(20, 0, 16, 0)
+
+        close_btn = QPushButton("✕")
+        close_btn.setObjectName("ghost")
+        close_btn.setFixedSize(30, 30)
+        close_btn.setStyleSheet(f"QPushButton{{background:transparent;border:none;color:{C['text3']};font-size:14px;}}"
+                               f"QPushButton:hover{{color:{C['text']};background:{C['bg3']};border-radius:6px;}}")
+        close_btn.clicked.connect(self.reject)
+        hl.addWidget(close_btn)
+        hl.addStretch()
 
         t_ = QLabel(t("restore_title"))
-        t_.setStyleSheet(f"color:{C['text']};font-size:18px;font-weight:700;background:transparent;")
-        lay.addWidget(t_)
-        sep = QFrame(); sep.setFrameShape(QFrame.HLine)
-        sep.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;")
-        lay.addWidget(sep)
+        t_.setStyleSheet(f"color:{C['text']};font-size:16px;font-weight:700;background:transparent;")
+        hl.addWidget(t_)
+        hl.addStretch()
+        lay.addWidget(header)
+
+        content = QWidget()
+        content.setStyleSheet(f"background: {C['bg1']};")
+        cl = QVBoxLayout(content)
+        cl.setContentsMargins(24, 20, 24, 20)
+        cl.setSpacing(14)
+
+        icon_w = QWidget()
+        icon_l = QVBoxLayout(icon_w)
+        icon_l.setAlignment(Qt.AlignCenter)
+        icon = QLabel("📥")
+        icon.setStyleSheet("font-size: 40px; background: transparent;")
+        icon_l.addWidget(icon)
+        cl.addWidget(icon_w)
 
         desc = QLabel(t("restore_desc"))
         desc.setWordWrap(True)
-        desc.setStyleSheet(f"color:{C['text3']};font-size:13px;background:transparent;")
-        lay.addWidget(desc)
-
-        fl = QLabel(t("restore_file_label"))
-        fl.setStyleSheet(f"color:{C['text3']};font-size:11px;font-weight:600;background:transparent;")
-        lay.addWidget(fl)
+        desc.setAlignment(Qt.AlignCenter)
+        desc.setStyleSheet(f"color:{C['text3']};font-size:12px;background:transparent;line-height:1.5;")
+        cl.addWidget(desc)
 
         fr = QHBoxLayout(); fr.setSpacing(8)
         self.fp = QLineEdit(); self.fp.setReadOnly(True); self.fp.setPlaceholderText(".r-pass")
-        self.fp.setFixedHeight(40)
+        self.fp.setFixedHeight(38)
         bb = QPushButton(t("restore_browse")); bb.setObjectName("secondary")
-        bb.setFixedHeight(40); bb.clicked.connect(self._browse)
-        fr.addWidget(self.fp); fr.addWidget(bb); lay.addLayout(fr)
+        bb.setFixedHeight(38); bb.clicked.connect(self._browse)
+        fr.addWidget(self.fp); fr.addWidget(bb); cl.addLayout(fr)
 
         ml = QLabel(t("restore_mode_label"))
         ml.setStyleSheet(f"color:{C['text3']};font-size:11px;font-weight:600;background:transparent;")
-        lay.addWidget(ml)
+        cl.addWidget(ml)
 
         self.rb_merge = QRadioButton(t("restore_mode_merge"))
         self.rb_replace = QRadioButton(t("restore_mode_replace"))
@@ -1708,21 +1891,30 @@ class RestoreDialog(QDialog):
             rb.setStyleSheet(f"QRadioButton{{color:{C['text3']};padding:4px 0;}}"
                             f"QRadioButton::indicator{{width:16px;height:16px;border-radius:8px;border:1.5px solid {C['border2']};background:{C['bg2']};}}"
                             f"QRadioButton::indicator:checked{{background:{C['accent']};border-color:{C['accent']};}}")
-            lay.addWidget(rb)
+            cl.addWidget(rb)
 
-        self.errl = QLabel(""); self.errl.setStyleSheet(f"color:{C['red']};font-size:12px;background:transparent;")
+        self.errl = QLabel("")
+        self.errl.setWordWrap(True)
+        self.errl.setAlignment(Qt.AlignCenter)
+        self.errl.setStyleSheet(f"color:{C['red']};font-size:11px;background:transparent;")
         self.errl.hide()
-        self.okl = QLabel(""); self.okl.setStyleSheet(f"color:{C['green']};font-size:12px;background:transparent;")
-        self.okl.hide()
-        lay.addWidget(self.errl); lay.addWidget(self.okl)
+        cl.addWidget(self.errl)
 
-        sep2 = QFrame(); sep2.setFrameShape(QFrame.HLine)
-        sep2.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;")
-        lay.addWidget(sep2)
-        br = QHBoxLayout(); br.setSpacing(10)
-        cl = QPushButton(t("btn_cancel")); cl.setObjectName("secondary"); cl.setFixedHeight(40); cl.clicked.connect(self.reject)
+        self.okl = QLabel("")
+        self.okl.setWordWrap(True)
+        self.okl.setAlignment(Qt.AlignCenter)
+        self.okl.setStyleSheet(f"color:{C['green']};font-size:11px;background:transparent;")
+        self.okl.hide()
+        cl.addWidget(self.okl)
+
+        cl.addStretch()
+
+        br = QHBoxLayout(); br.setSpacing(12)
+        cl_btn = QPushButton(t("btn_cancel")); cl_btn.setObjectName("secondary"); cl_btn.setFixedHeight(40); cl_btn.clicked.connect(self.reject)
         self.rb_btn = QPushButton(t("restore_btn")); self.rb_btn.setFixedHeight(40); self.rb_btn.clicked.connect(self._do)
-        br.addWidget(cl); br.addWidget(self.rb_btn); lay.addLayout(br)
+        br.addWidget(cl_btn); br.addWidget(self.rb_btn); cl.addLayout(br)
+
+        lay.addWidget(content)
 
     def _browse(self):
         p, _ = QFileDialog.getOpenFileName(self, t("restore_open_dialog"), str(Path.home()), t("restore_filter"))
@@ -1806,6 +1998,7 @@ class MainWindow(QMainWindow):
         self._main_splitter.addWidget(self._detail_panel)
         self._main_splitter.setSizes([700, 340])
         self._main_splitter.setCollapsible(1, True)
+        self._main_splitter.setCollapsible(0, False)
 
         root.addWidget(self._main_splitter, stretch=1)
 
@@ -1819,7 +2012,7 @@ class MainWindow(QMainWindow):
     def _build_sidebar(self) -> QWidget:
         sb = QWidget()
         sb.setFixedWidth(220)
-        sb.setStyleSheet(f"background:{C['bg1']};border-right:1px solid {C['border']};")
+        sb.setStyleSheet(f"background:{C['bg1']};")
 
         lay = QVBoxLayout(sb)
         lay.setContentsMargins(0, 0, 0, 0)
@@ -1827,17 +2020,17 @@ class MainWindow(QMainWindow):
 
         # Logo area
         logo_w = QWidget()
-        logo_w.setFixedHeight(64)
-        logo_w.setStyleSheet(f"background:{C['bg1']}; border-bottom:1px solid {C['border']};")
+        logo_w.setFixedHeight(56)
+        logo_w.setStyleSheet(f"background:{C['bg1']};")
 
         logo_l = QHBoxLayout(logo_w)
-        logo_l.setContentsMargins(0, 0, 0, 0)
-        logo_l.setAlignment(Qt.AlignCenter)
+        logo_l.setContentsMargins(20, 0, 20, 0)
+        logo_l.setAlignment(Qt.AlignVCenter)
 
         name_lbl = QLabel("r-pass")
         name_lbl.setStyleSheet(f"""
             color: {C['text']};
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             background: transparent;
             letter-spacing: 0.5px;
@@ -1872,51 +2065,34 @@ class MainWindow(QMainWindow):
             b.clicked.connect(fn)
             return b
 
-        lay.addWidget(nav_btn(t("all_entries"), self._filter_all))
+        self._btn_all = nav_btn(t("all_entries"), self._filter_all)
+        lay.addWidget(self._btn_all)
 
         sep = QFrame(); sep.setFrameShape(QFrame.HLine)
         sep.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;margin:8px 0;")
         lay.addWidget(sep)
 
-        lay.addWidget(nav_btn("↓  " + t("backup"), self._open_backup))
-        lay.addWidget(nav_btn("↑  " + t("restore"), self._open_restore))
+        self._btn_backup = nav_btn("↓  " + t("backup"), self._open_backup)
+        self._btn_restore = nav_btn("↑  " + t("restore"), self._open_restore)
+        lay.addWidget(self._btn_backup)
+        lay.addWidget(self._btn_restore)
 
         sep2 = QFrame(); sep2.setFrameShape(QFrame.HLine)
         sep2.setStyleSheet(f"background:{C['border']};max-height:1px;border:none;margin:8px 0;")
         lay.addWidget(sep2)
 
-        lay.addWidget(nav_btn("🌐 " + t("language"), self._open_lang))
-
-        # Add account button
-        add_acc = QPushButton(t("btn_add_account")); add_acc.setObjectName("ghost")
-        add_acc.setFixedHeight(38)
-        add_acc.setStyleSheet(f"""
-            QPushButton {{
-                background: transparent;
-                color: {C['text3']};
-                border: none;
-                text-align: left;
-                padding: 0 20px;
-                font-size: 12px;
-                font-weight: 500;
-                border-radius: 0;
-            }}
-            QPushButton:hover {{
-                background: {C['bg3']};
-                color: {C['text2']};
-            }}
-        """)
-        add_acc.clicked.connect(self._add_account)
-        lay.addWidget(add_acc)
+        self._btn_lang = nav_btn("🌐 " + t("language"), self._open_lang)
+        lay.addWidget(self._btn_lang)
 
         lay.addStretch()
 
         # Crypto info
-        ci = QLabel("AES-256-CBC · PBKDF2")
-        ci.setStyleSheet(f"color:{C['text4']};font-size:10px;background:transparent;padding:0 20px 4px;")
+        ci = QLabel("AES-256-GCM · Argon2id")
+        ci.setStyleSheet(f"color:{C['text4']};font-size:10px;background:transparent;padding:0 20px 8px;")
         lay.addWidget(ci)
 
-        lay.addWidget(nav_btn("🔒  " + t("lock"), self._lock, danger=False))
+        self._btn_lock = nav_btn("🔒  " + t("lock"), self._lock, danger=False)
+        lay.addWidget(self._btn_lock)
         return sb
 
     def _build_main_area(self) -> QWidget:
@@ -1928,50 +2104,46 @@ class MainWindow(QMainWindow):
 
         # Toolbar
         toolbar = QWidget()
-        toolbar.setFixedHeight(64)
-        toolbar.setStyleSheet(f"background:{C['bg']};border-bottom:1px solid {C['border']};")
+        toolbar.setFixedHeight(56)
+        toolbar.setStyleSheet(f"background:{C['bg']};")
         tl = QHBoxLayout(toolbar)
         tl.setContentsMargins(24, 0, 20, 0)
         tl.setSpacing(12)
 
-        title = QLabel(t("entries_header"))
-        title.setStyleSheet(f"color:{C['text']};font-size:20px;font-weight:700;background:transparent;letter-spacing:-0.5px;")
-        tl.addWidget(title)
+        self._title = QLabel(t("entries_header"))
+        self._title.setStyleSheet(f"color:{C['text']};font-size:18px;font-weight:700;background:transparent;")
+        tl.addWidget(self._title)
         tl.addStretch()
 
         # search panel
         search_container = QWidget()
-        search_container.setFixedSize(300, 36) # Genişliği biraz artırdık, alanın var.
+        search_container.setFixedSize(260, 36)
 
         self.search_input = QLineEdit(search_container)
         self.search_input.setPlaceholderText(t("search_placeholder"))
-        self.search_input.setGeometry(0, 0, 300, 36)
+        self.search_input.setGeometry(0, 0, 260, 36)
         self.search_input.setStyleSheet(f"""
             QLineEdit {{
                 background: {C['bg2']};
                 border: 1px solid {C['border']};
-                border-radius: 8px; /* Tam yuvarlak yerine 8px: Kesilme hissini bitirir */
+                border-radius: 18px;
                 color: {C['text']};
                 font-size: 13px;
-                padding: 0 12px 0 34px; /* Sol boşluğu ikon için ayarladık */
+                padding: 0 14px;
             }}
             QLineEdit:focus {{
                 border-color: {C['accent']};
-                background: {C['bg']};
             }}
+            QLineEdit::placeholder {{ color: {C['text4']}; }}
         """)
         self.search_input.textChanged.connect(self._search)
-
-        search_icon = QLabel("🔍", search_container)
-        search_icon.setStyleSheet("font-size: 12px; background: transparent; color: #888;")
-        search_icon.setGeometry(12, 11, 16, 16) # İkonu tam yerine oturttuk
         tl.addWidget(search_container)
         tl.addStretch()
 
         # new button
-        new_btn = QPushButton("➕  " + t("btn_new_entry"))
-        new_btn.setFixedHeight(36)
-        new_btn.setStyleSheet(f"""
+        self._new_btn = QPushButton("➕  " + t("btn_new_entry"))
+        self._new_btn.setFixedHeight(36)
+        self._new_btn.setStyleSheet(f"""
             QPushButton {{
                 background: {C['accent']};
                 color: white;
@@ -1983,22 +2155,39 @@ class MainWindow(QMainWindow):
             }}
             QPushButton:hover {{ background: {C['accent2']}; }}
         """)
-        new_btn.clicked.connect(self._add)
-        tl.addWidget(new_btn)
+        self._new_btn.clicked.connect(self._add)
+        tl.addWidget(self._new_btn)
 
         # generate
-        gen_btn = QPushButton(" 🔑 ")
-        gen_btn.setObjectName("secondary")
-        gen_btn.setFixedSize(36, 36)
-        gen_btn.setToolTip(t("btn_generate"))
-        gen_btn.clicked.connect(lambda: GeneratorDialog(self).exec_())
-        tl.addWidget(gen_btn)
+        self._gen_btn = QPushButton("🔑")
+        self._gen_btn.setObjectName("secondary")
+        self._gen_btn.setFixedSize(44, 36)
+        self._gen_btn.setStyleSheet(f"""
+            QPushButton {{
+                background: {C['bg3']};
+                border: 1px solid {C['border']};
+                border-radius: 8px;
+                font-size: 18px;
+                padding: 0 4px;
+            }}
+            QPushButton:hover {{
+                background: {C['bg4']};
+                border-color: {C['border2']};
+            }}
+        """)
+        self._gen_btn.setToolTip(t("btn_generate"))
+        self._gen_btn.clicked.connect(lambda: GeneratorDialog(self).exec_())
+        tl.addWidget(self._gen_btn)
 
         lay.addWidget(toolbar)
 
+        sep = QFrame(); sep.setFixedHeight(1)
+        sep.setStyleSheet(f"background:{C['border']};")
+        lay.addWidget(sep)
+
         # Count label
         self._count_lbl = QLabel("")
-        self._count_lbl.setStyleSheet(f"color:{C['text4']};font-size:11px;background:{C['bg']};padding:8px 24px 0;")
+        self._count_lbl.setStyleSheet(f"color:{C['text4']};font-size:11px;background:{C['bg']};padding:6px 24px 4px;")
         lay.addWidget(self._count_lbl)
 
         # scroll area for cards
@@ -2037,9 +2226,9 @@ class MainWindow(QMainWindow):
             empty = QWidget()
             empty_l = QVBoxLayout(empty)
             empty_l.setAlignment(Qt.AlignCenter)
-            empty_l.setSpacing(8)
-            ei = QLabel("◇ ")
-            ei.setStyleSheet(f"font-size:40px;background:transparent;color:{C['text4']};")
+            empty_l.setSpacing(12)
+            ei = QLabel("🔐")
+            ei.setStyleSheet(f"font-size:48px;background:transparent;")
             ei.setAlignment(Qt.AlignCenter)
             en = QLabel(t("no_entries"))
             en.setStyleSheet(f"color:{C['text3']};font-size:16px;font-weight:600;background:transparent;")
@@ -2156,25 +2345,20 @@ class MainWindow(QMainWindow):
         self._reset_lock_timer()
         dlg = LanguageDialog(self)
         if dlg.exec_() == QDialog.Accepted:
-            QMessageBox.information(self, "r-pass", t("lang_restart_note"))
-
-    def _add_account(self):
-        """Allow switching to or adding a new r-pass account"""
-        self._reset_lock_timer()
-        from PyQt5.QtWidgets import QInputDialog
-        items = ["Switch / re-authenticate", "Create new vault (replaces current)"]
-        item, ok = QInputDialog.getItem(
-            self, "Account", "Choose action:", items, 0, False)
-        if ok:
-            if "new vault" in item.lower():
-                reply = QMessageBox.question(
-                    self, "Warning",
-                    "Creating a new vault will delete all existing entries.\nContinue?",
-                    QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-                if reply == QMessageBox.Yes:
-                    self._relock(force_setup=True)
-            else:
-                self._relock()
+            self._btn_all.setText(t("all_entries"))
+            self._btn_backup.setText("↓  " + t("backup"))
+            self._btn_restore.setText("↑  " + t("restore"))
+            self._btn_lang.setText("🌐 " + t("language"))
+            self._btn_lock.setText("🔒  " + t("lock"))
+            self._title.setText(t("entries_header"))
+            self._new_btn.setText("➕  " + t("btn_new_entry"))
+            self.search_input.setPlaceholderText(t("search_placeholder"))
+            self._gen_btn.setToolTip(t("btn_generate"))
+            if hasattr(self, '_detail_panel') and self._detail_panel:
+                self._detail_panel.edit_btn.setText(t("btn_edit"))
+                self._detail_panel.del_btn.setText(t("btn_delete"))
+            self._reload(self.search_input.text().strip())
+            self.sb.showMessage(t("lang_restart_note"), 3000)
 
     def _auto_lock(self):
         self.sb.showMessage(t("status_auto_locked"), 3000)
