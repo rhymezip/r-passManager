@@ -5,86 +5,77 @@
 [![PyQt5](https://img.shields.io/badge/UI-PyQt5-green.svg)](https://pypi.org/project/PyQt5/)
 [![Security](https://img.shields.io/badge/Crypto-AES--256--GCM-red.svg)]()
 
-> A secure, cross-platform, local password manager built with Python and PyQt5. 
+> A secure, cross-platform, local password manager built with Python and PyQt5.
 
 r-pass is designed for users who prefer keeping their credentials offline and under their full control. It uses state-of-the-art cryptographic standards to ensure your vault remains impenetrable.
 
 ## Features
 
-- **Modern Dark UI**: Sleek, rounded interface with native macOS styling
-- **Offline By Design**: No cloud syncing, no external servers. Your vault stays on your local machine.
-- **Modern Cryptography**: 
+- **Offline Storage**: All data stored locally in SQLite database
+- **Modern Cryptography**:
   - Key Derivation: Argon2id (memory-hard, side-channel resistant)
-  - Encryption: AES-256 in GCM mode (Authenticated Encryption) ensures data confidentiality and integrity.
-- **Cross-Platform**: Native feel and performance on Windows, macOS, and Linux.
-- **Internationalization (i18n)**: Built-in support for English, Turkish, and Russian.
-- **Quality of Life**: 
-  - Integrated password generator with entropy calculation
-  - Adjustable password length (8-128 characters)
-  - Character type toggles (uppercase, lowercase, digits, symbols)
-  - Automatic clipboard clearing (30 seconds)
+  - Encryption: AES-256-GCM (Authenticated Encryption)
+- **Modern Dark UI**: Sleek interface with rounded corners, card-based entry display
+- **Password Generator**: Adjustable length (8-128), character type toggles, entropy calculation
+- **Security Features**:
   - Auto-lock on inactivity (15 minutes)
-  - Secure vault backup and restore mechanism (.r-pass files)
+  - Automatic clipboard clearing (30 seconds)
+- **Backup/Restore**: Export encrypted vault to .r-pass files
+- **Multi-language**: English, Turkish, Russian
+- **Cross-Platform**: Native look on macOS, Linux, and Windows
 
 ## Tech Stack
 
-- Core: Python 3.9+
-- UI Framework: PyQt5
-- Database: SQLite3 (Local file storage)
-- Cryptography: PyCryptodome (AES-GCM), argon2-cffi (Key Derivation)
+- **Core**: Python 3.9+
+- **UI Framework**: PyQt5
+- **Database**: SQLite3
+- **Cryptography**: PyCryptodome (AES-GCM), argon2-cffi (Argon2id)
 
-## Installation (Source) 🧑‍💻
+## Installation (Source)
 
-If you prefer to run the application from source, follow these steps:
+```bash
+git clone https://github.com/rhymezip/r-passManager.git
+cd r-passManager
+python3 -m venv venv
+source venv/bin/activate  # Linux/macOS
+# venv\Scripts\activate    # Windows
+pip install -r requirements.txt
+python r-passManager.py
+```
 
-1. Clone the repository
-`git clone https://github.com/rhymezip/r-passManager.git`
-`cd r-passManager`
+## Pre-compiled Executables
 
-2. Create and activate a virtual environment
-`python3 -m venv venv`
-`source venv/bin/activate`  # On Windows use: venv\Scripts\activate
+Pre-compiled binaries available in Releases:
 
-3. Install dependencies
-`pip install -r requirements.txt`
+- **macOS (.dmg)**: Compatible with Intel and Apple Silicon
+- **Linux (.AppImage)**: Requires recent glibc
+- **Windows (.exe)**: Standard installation
 
-4. Run the application
-`python r-passManager.py`
+## Requirements
 
-## Pre-compiled Executables ⌨
+- Python 3.9+
+- PyQt5
+- pycryptodome
+- argon2-cffi
+- pyperclip (optional, for clipboard)
 
-Pre-compiled standalone binaries are available in the Releases section for all major operating systems. You do not need Python installed to run these.
+## Usage
 
-- Windows (.exe): Compiled for standard Windows environments.
-- macOS (.app): Compiled for macOS with native dark theme.
-- Linux (.AppImage): Built on Arch Linux. 
-  - Note: Because it is built on a rolling-release distribution, the AppImage requires relatively recent glibc versions. It may not run out-of-the-box on older LTS distributions (e.g., older Linux Mint or Debian stable releases).
+1. **First Launch**: Create a master password to secure your vault
+2. **Add Entry**: Click "New" to add credentials with name, URL, username, password, notes
+3. **Generate Password**: Click the key icon (🔑) to generate secure passwords
+4. **Quick Copy**: Hover over entries to copy username or password
+5. **Backup**: Export your vault from the sidebar
+6. **Language**: Switch languages directly from the sidebar
 
-## Usage 🖱
+## Security
 
-1. **Setup**: On the first launch, create a master password. This password acts as the key to your vault and cannot be recovered if lost.
-2. **Adding Entries**: Click the `New` button to store credentials. Use the built-in generator (🔑) for secure passwords.
-3. **Password Generator**: Click the key button to generate passwords with adjustable length and character options.
-4. **Quick Actions**: Hover over any entry to quickly copy the password or edit the details.
-5. **Backup/Restore**: Use the sidebar to securely export your encrypted vault, making it easy to migrate between devices.
-6. **Language**: Switch between English, Turkish, and Russian directly from the sidebar.
+- Master password never stored, only derived key
+- All entries encrypted with AES-256-GCM
+- Key derived using Argon2id (64MB memory, 3 iterations)
+- Clipboard auto-clears after 30 seconds
+- Auto-locks after 15 minutes of inactivity
 
-## Roadmap 📍
+## License
 
-- [ ] Native mobile companion apps
-- [ ] Browser extension integration via native messaging
-- [ ] Support for TOTP (Time-based One-Time Passwords)
-- [ ] Hardware security key (YubiKey) support for 2FA unlocking
-- [ ] Biometric unlock (Touch ID / Windows Hello)
-
-## License 📜
-
-MIT License
-
-Copyright (c) 2026
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+MIT License - See LICENSE file
