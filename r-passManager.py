@@ -2419,7 +2419,7 @@ def main():
 
     db = Database()
     mode = "setup" if not db.is_initialized() else "unlock"
-    dlg = LoginScreen(db, mode=mode)
+    dlg = LoginScreen(db, mode=mode) 
 
     if dlg.exec_() != QDialog.Accepted or dlg.key is None:
         sys.exit(0)
